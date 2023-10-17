@@ -35,4 +35,8 @@ public class DemographicsService {
         return allPatients.stream().anyMatch(patient -> patient.getId().equals(id));
     }
 
+    public Patient getPatient(Integer patId) {
+        // TODO: 10/17/2023 To code 
+        return null;
+    }
 }
