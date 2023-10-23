@@ -17,7 +17,7 @@ public class KeywordSearchService {
     public Map<String, Long> countKeywordsForPatient(int patId) {
         List<Notes> patientNotes = notesService.getNotesByPatientId(patId);
         Map<String, Long> keywordCounts = new HashMap<>();
-        List<String> keywords = Arrays.asList("cancer", "diabetes", "None");
+        List<String> keywords = Arrays.asList("cancer", "diabetes", "None", "Hemoglobin A1C", "Microalbumin", "Body Height", "Body Weight", "Smoker", "Abnormal", "Cholesterol", "Dizziness", "Relapse", "Reaction", "Antibodies");
 
         for (String keyword : keywords) {
             keywordCounts.put(keyword, patientNotes.stream()
@@ -25,5 +25,10 @@ public class KeywordSearchService {
                     .count());
         }
         return keywordCounts;
+    }
+
+    public List<String> getKeywordsFromNotes(List<Notes> notes) {
+        List<String> keywords = Arrays.asList("cancer", "diabetes", "None", "Hemoglobin A1C", "Microalbumin", "Body Height", "Body Weight", "Smoker", "Abnormal", "Cholesterol", "Dizziness", "Relapse", "Reaction", "Antibodies");
+        return keywords;
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class DemographicsService {
@@ -30,13 +31,14 @@ public class DemographicsService {
         return response.getBody();
     }
 
-    public boolean patientExists(Integer id) {
+    public boolean patientExists(int id) {
         List<Patient> allPatients = getAllPatients();
-        return allPatients.stream().anyMatch(patient -> patient.getId().equals(id));
+        return allPatients.stream().anyMatch(patient -> Objects.equals(patient.getId(), id));
     }
 
-    public Patient getPatient(Integer patId) {
-        // TODO: 10/17/2023 To code 
-        return null;
+    public Patient getPatient(int id) {
+        // TODO: 10/17/2023 To code
+        List<Patient> patients = getAllPatients();
+        return patients.stream().filter(patient -> Objects.equals(patient.getId(), id)).findFirst().orElse(null);
     }
 }

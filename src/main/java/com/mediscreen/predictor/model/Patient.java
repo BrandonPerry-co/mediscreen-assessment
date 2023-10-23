@@ -6,6 +6,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 
 @Data
 @Builder
@@ -19,5 +23,13 @@ public class Patient {
     private String given;
     private String sex;
     private String phone;
+
+    public CharSequence getAge() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+        LocalDate birthDate = LocalDate.parse(dob, formatter);
+        LocalDate currentDate = LocalDate.now();
+        int ageInYears = (int) ChronoUnit.YEARS.between(birthDate, currentDate);
+        return String.valueOf(ageInYears);
+    }
 }
 

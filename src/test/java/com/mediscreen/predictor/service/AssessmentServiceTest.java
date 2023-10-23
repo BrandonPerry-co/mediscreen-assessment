@@ -25,11 +25,11 @@ class AssessmentServiceTest {
     @Test
     public void testAssessPatient() {
         // TODO: 10/15/2023 To code
-        Integer patId = 1;
-        Patient testPatient = Patient.builder().given("Test").family("TestNone").dob("1/23/1990").build();
-        String expected = "Patient: Test TestNone (age 52) diabetes assessment is: None";
-        when(demographicsServiceMock.getPatient(patId)).thenReturn(testPatient);
-        String result = assessmentService.assessPatient(patId);
+        int id = 1;
+        Patient testPatient = Patient.builder().given("Test").family("TestNone").dob("1/23/1970").build();
+        String expected = "Patient: Test TestNone (age 53) diabetes assessment is: None";
+        when(demographicsServiceMock.getPatient(id)).thenReturn(testPatient);
+        String result = assessmentService.assessPatient(id);
         assertThat(result).isEqualTo(expected);
     }
 }

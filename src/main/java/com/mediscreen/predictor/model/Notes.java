@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Notes {
     private String id;
-    private Integer patId;
+    private int patId;
     private String note;
 }

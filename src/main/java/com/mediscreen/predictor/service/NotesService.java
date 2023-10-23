@@ -13,6 +13,10 @@ public class NotesService {
     private final String NOTES_API_URL = "http://localhost:8082/patHistory";
 
     public List<Notes> getNotesByPatientId(int patId) {
-        return Arrays.asList(restTemplate.getForObject(NOTES_API_URL + "?patId=" + patId, Notes[].class));
+        return restTemplate.getForObject(NOTES_API_URL + "/" + patId, List.class);
     }
+
+//    public Notes getNotesById(int patId, String id) {
+//        return restTemplate.getForObject(NOTES_API_URL + "/" + id, Notes.class);
+//    }
 }
