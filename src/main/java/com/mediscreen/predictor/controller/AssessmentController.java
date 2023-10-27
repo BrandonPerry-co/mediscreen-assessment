@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/assess")
-@Slf4j
+
 public class AssessmentController {
 
     @Autowired
@@ -30,7 +30,7 @@ public class AssessmentController {
     public ResponseEntity<String> assessPatient(@RequestParam Integer patId) {
 
 
-        log.info("Assessing patient");
+
         if (!demographicsService.patientExists(patId)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

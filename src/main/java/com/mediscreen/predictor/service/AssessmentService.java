@@ -49,7 +49,10 @@ public class AssessmentService {
         NotesService notesService = new NotesService();
         List<Notes> patientNotes = notesService.getNotesByPatientId(1);
         String assessment = "None";
-        if (patientNotes.stream().anyMatch(note -> note.getNote().toLowerCase().contains("None"))) {
+//        if (patientNotes.stream().anyMatch(note -> note.getNote().contains("None"))) {
+//            assessment = "In Danger";
+//        }
+        if (patientNotes.stream().anyMatch(note -> {System.out.println(note.toString());return false;})) {
             assessment = "In Danger";
         }
         return assessment;
