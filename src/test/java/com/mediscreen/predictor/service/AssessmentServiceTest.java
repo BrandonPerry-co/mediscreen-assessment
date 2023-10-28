@@ -1,12 +1,14 @@
 package com.mediscreen.predictor.service;
 
+import com.mediscreen.predictor.model.Notes;
 import com.mediscreen.predictor.model.Patient;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.mock.mockito.MockBean;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -29,8 +31,10 @@ class AssessmentServiceTest {
         // TODO: 10/15/2023 To code
         int id = 1;
         Patient testPatient = Patient.builder().given("Test").family("TestNone").dob("1/23/1970").build();
+        List<Notes> testNotes = List.of(Notes.builder().patId(id).note("Patient: has red blood None.").build());
         String expected = "Patient: Test TestNone (age 53) diabetes assessment is: None";
         when(demographicsServiceMock.getPatient(id)).thenReturn(testPatient);
+        when(notesServiceMock.getNotesByPatientId(id)).thenReturn(testNotes);
         String result = assessmentService.assessPatient(id);
         assertThat(result).isEqualTo(expected);
     }

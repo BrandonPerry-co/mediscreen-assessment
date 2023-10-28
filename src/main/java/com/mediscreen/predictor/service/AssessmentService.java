@@ -46,13 +46,10 @@ public class AssessmentService {
     }
 
     private String determineAssessment(List<String> keywords) {
-        NotesService notesService = new NotesService();
         List<Notes> patientNotes = notesService.getNotesByPatientId(1);
         String assessment = "None";
-//        if (patientNotes.stream().anyMatch(note -> note.getNote().contains("None"))) {
-//            assessment = "In Danger";
-//        }
-        if (patientNotes.stream().anyMatch(note -> {System.out.println(note.toString());return false;})) {
+        // TODO: 10/28/2023 determine if how many trigger terms are in the notes 
+        if (patientNotes.stream().anyMatch(note -> note.getNote().contains("None"))) {
             assessment = "In Danger";
         }
         return assessment;
