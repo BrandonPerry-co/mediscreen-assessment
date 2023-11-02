@@ -5,6 +5,7 @@ import com.mediscreen.predictor.model.Patient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -48,7 +49,7 @@ public class AssessmentService {
     private String determineAssessment(List<String> keywords) {
         List<Notes> patientNotes = notesService.getNotesByPatientId(1);
         String assessment = "None";
-        // TODO: 10/28/2023 determine if how many trigger terms are in the notes 
+        // TODO: 10/28/2023 determine if how many trigger terms are in the notes
         if (patientNotes.stream().anyMatch(note -> note.getNote().contains("None"))) {
             assessment = "In Danger";
         }
