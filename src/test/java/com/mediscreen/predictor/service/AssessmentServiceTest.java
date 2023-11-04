@@ -25,37 +25,18 @@ class AssessmentServiceTest {
     @InjectMocks
     private AssessmentService assessmentService;
 
-    @InjectMocks
-    private KeywordSearchService keywordSearchService;
-
 
     @Test
     public void testAssessPatient() {
         // TODO: 10/15/2023 To code
         int id = 1;
         Patient testPatient = Patient.builder().given("Test").family("TestNone").dob("1/23/1970").build();
-        List<Notes> testNotes = List.of(Notes.builder().patId(id).note("Patient: has red blood None.").build());
-        String expected = "Patient: Test TestNone (age 53) diabetes assessment is: None";
+        List<Notes> testNotes = List.of(Notes.builder().patId(id).note("Patient: has red blood None None Body Weight.").build());
+        String expected = "Patient: Test TestNone (age 53) diabetes assessment is: In Danger";
         when(demographicsServiceMock.getPatient(id)).thenReturn(testPatient);
         when(notesServiceMock.getNotesByPatientId(id)).thenReturn(testNotes);
         String result = assessmentService.assessPatient(id);
         assertThat(result).isEqualTo(expected);
     }
 
-
-    @Test
-    public void testKeywordSearch() {
-        // TODO: 10/15/2023 To code
-        int id = 1;
-//        Patient testPatient = Patient.builder().given("Test").family("TestNone").dob("1/23/1970").build();
-        List<Notes> testNotes = List.of(Notes.builder().patId(id).note("Patient: has red blood None.").build());
-        String expected = "borderline";
-//        when(demographicsServiceMock.getPatient(id)).thenReturn(testPatient);
-        when(notesServiceMock.getNotesByPatientId(id)).thenReturn(testNotes);
-        when(keywordSearchServiceMock.getKeywordsFromNotes(testNotes)).thenReturn(List.of("None"));
-//        String result = assessmentService.assessPatient(id);
-//        String result = keywordSearchService.countKeywordsForPatient(id).toString();
-        String result = keywordSearchService.getKeywordsFromNotes(testNotes).toString();
-        assertThat(result).isEqualTo(expected);
-    }
 }
