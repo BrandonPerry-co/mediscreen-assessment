@@ -49,7 +49,7 @@ public class AssessmentControllerTest {
         var testPatId = 1;
 
         when(demographicsServiceMock.patientExists(testPatId)).thenReturn(true);
-        when(assessmentServiceMock.assessPatient(testPatId)).thenReturn(expected);
+        when(assessmentServiceMock.determineDiabetesRisk(testPatId)).thenReturn(expected);
         MvcResult result = mockMvc.perform(get("/assess/id").param("patId", String.valueOf(testPatId)))
                 .andExpect(status().isOk()).andReturn();
 

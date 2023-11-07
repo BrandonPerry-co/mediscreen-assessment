@@ -24,12 +24,12 @@ public class Patient {
     private String sex;
     private String phone;
 
-    public CharSequence getAge() {
+    public int getAge() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
         LocalDate birthDate = LocalDate.parse(dob, formatter);
         LocalDate currentDate = LocalDate.now();
         int ageInYears = (int) ChronoUnit.YEARS.between(birthDate, currentDate);
-        return String.valueOf(ageInYears);
+        return ageInYears;
     }
 }
 

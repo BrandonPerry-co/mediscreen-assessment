@@ -36,7 +36,7 @@ public class AssessmentController {
         }
         // TODO: 10/15/2023 Determine the assessment using the assessment service
 
-        var result = assessmentService.assessPatient(patId);
+        var result = assessmentService.determineDiabetesRisk(patId);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

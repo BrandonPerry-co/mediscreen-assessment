@@ -25,4 +25,22 @@ public class DemographicsServiceTest {
         String result = demographicsServiceMock.getAllPatients().toString();
         assertThat(result).isEqualTo(expected);
     }
+
+    @Test
+    void testPatientExists() {
+        int id = 1;
+        when(demographicsServiceMock.patientExists(id)).thenReturn(true);
+        boolean result = demographicsServiceMock.patientExists(id);
+        assertThat(result).isTrue();
+    }
+
+    @Test
+    void testPatientGetAge() {
+        int id = 1;
+        Patient testPatientAge = Patient.builder().id("1").dob("1/23/1970").build();
+        String expected = "1, 53";
+        when(demographicsServiceMock.getPatient(id)).thenReturn(testPatientAge);
+        String result = "1, " + demographicsServiceMock.getPatient(id).getAge();
+        assertThat(result).isEqualTo("1, 53");
+    }
 }
