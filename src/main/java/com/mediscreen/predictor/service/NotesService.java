@@ -16,7 +16,7 @@ public class NotesService {
         return restTemplate.getForObject(NOTES_API_URL + "/" + patId, List.class);
     }
 
-//    public Notes getNotesById(int patId, String id) {
-//        return restTemplate.getForObject(NOTES_API_URL + "/" + id, Notes.class);
+//    public List<Notes> getNotesByFamilyName(String familyName) {
+//        return restTemplate.getForObject(NOTES_API_URL + "/" + familyName, List.class);
 //    }
 }

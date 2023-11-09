@@ -4,7 +4,6 @@ package com.mediscreen.predictor.controller;
 import com.mediscreen.predictor.service.AssessmentService;
 import com.mediscreen.predictor.service.DemographicsService;
 import com.mediscreen.predictor.service.KeywordSearchService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +27,6 @@ public class AssessmentController {
 
     @GetMapping("/id")
     public ResponseEntity<String> assessPatient(@RequestParam Integer patId) {
-
 
 
         if (!demographicsService.patientExists(patId)) {
