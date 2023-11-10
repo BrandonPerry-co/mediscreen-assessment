@@ -2,6 +2,7 @@ package com.mediscreen.predictor.service;
 
 import com.mediscreen.predictor.model.Notes;
 import com.mediscreen.predictor.model.Patient;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -11,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Objects;
-
+@Slf4j
 @Service
 public class DemographicsService {
     @Autowired
@@ -32,9 +33,22 @@ public class DemographicsService {
     }
 
     public boolean patientExists(int id) {
+        log.info("Assessing patient: {}", id);
         List<Patient> allPatients = getAllPatients();
+        log.info("Logging all the patient: {}", allPatients);
+        log.info("Logging all the patient: {}", allPatients.stream().anyMatch(patient -> Objects.equals(patient.getId(), id)));
         return allPatients.stream().anyMatch(patient -> Objects.equals(patient.getId(), id));
     }
+
+//    public Patient getPatientID(int id) {
+//        log.info("Assessing patient: {}", id);
+//        List<Patient> allPatients = getAllPatients();
+//        log.info("Logging all the patient: {}", allPatients);
+//        log.info("Logging all the patient: {}", allPatients.stream().anyMatch(patient -> Objects.equals(patient.getId(), id)));
+//        return allPatients.stream().filter(patient -> Objects.equals(patient.getId(), id)).findFirst().orElse(null);
+//    }
+
+
 
     public Patient getPatient(int id) {
         // TODO: 10/17/2023 To code

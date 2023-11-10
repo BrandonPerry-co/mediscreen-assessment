@@ -32,11 +32,11 @@ public class AssessmentService {
 //○ Borderline - patient has a reference to two triggers, and is over 30 years of
 //age. *DONE*
 //○ In danger - depends on patient’s age and sex. If under 30, and male, then
-//three trigger terms.
-//○ If under 30 and female, four trigger terms. If either over 30, then six.
+//three trigger terms. *DONE*
+//○ If under 30 and female, four trigger terms. If either over 30, then six. *DONE*
 //○ Early Onset - again, depends on age and sex. If under 30, and male, then
-//five trigger terms.
-//○ If under 30 and female, seven trigger terms. If over 30, then eight or more.
+//five trigger terms. *DONE*
+//○ If under 30 and female, seven trigger terms. If over 30, then eight or more. *DONE*
 
 
         if ((age > 30 && triggerTerms >= 8) ||

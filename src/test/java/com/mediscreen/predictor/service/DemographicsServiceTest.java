@@ -14,6 +14,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class DemographicsServiceTest {
 
+    private DemographicsService demographicsService;
     @Mock
     private DemographicsService demographicsServiceMock;
 
@@ -26,13 +27,13 @@ public class DemographicsServiceTest {
         assertThat(result).isEqualTo(expected);
     }
 
-    @Test
-    void testPatientExists() {
-        int id = 1;
-        when(demographicsServiceMock.patientExists(id)).thenReturn(true);
-        boolean result = demographicsServiceMock.patientExists(id);
-        assertThat(result).isTrue();
-    }
+//    @Test
+//    void testPatientExists() {
+//        int id = 1;
+//        when(demographicsServiceMock.patientExists(id)).thenReturn(true);
+//        boolean result = demographicsServiceMock.patientExists(id);
+//        assertThat(result).isTrue();
+//    }
 
     @Test
     void testPatientGetAge() {
@@ -43,4 +44,13 @@ public class DemographicsServiceTest {
         String result = "1, " + demographicsServiceMock.getPatient(id).getAge();
         assertThat(result).isEqualTo("1, 53");
     }
+
+    @Test
+    void testPatientExists() {
+        int id = 1;
+        when(demographicsServiceMock.patientExists(id)).thenReturn(true);
+        boolean result = demographicsServiceMock.patientExists(id);
+        assertThat(result).isTrue();
+    }
+
 }
