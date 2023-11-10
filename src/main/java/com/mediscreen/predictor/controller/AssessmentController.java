@@ -1,6 +1,7 @@
 package com.mediscreen.predictor.controller;
 
 
+import com.mediscreen.predictor.model.Patient;
 import com.mediscreen.predictor.service.AssessmentService;
 import com.mediscreen.predictor.service.DemographicsService;
 import com.mediscreen.predictor.service.KeywordSearchService;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -27,17 +30,28 @@ public class AssessmentController {
     @Autowired
     private KeywordSearchService keywordSearchService;
 
+//    @GetMapping("/id")
+//    public ResponseEntity<String> assessPatient(@RequestParam Integer patId) {
+//
+//        log.info("Assessing patient: {}", patId);
+//        if (!demographicsService.patientExists(patId)) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//        // TODO: 10/15/2023 Determine the assessment using the assessment service
+//
+//        var result = assessmentService.determineDiabetesRisk(patId);
+//        log.info("Assessment result: {}", result);
+//        return new ResponseEntity<>(result, HttpStatus.OK);
+//    }
+
     @GetMapping("/id")
-    public ResponseEntity<String> assessPatient(@RequestParam Integer patId) {
-
-        log.info("Assessing patient: {}", patId);
-        if (!demographicsService.patientExists(patId)) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<Patient> assessPatient(@RequestParam Integer patId) throws Exception {
+        Patient onePatient = demographicsService.getPatientDemo(patId);
+        if (onePatient == null) {
+            throw new Exception("Patient not found!");
         }
-        // TODO: 10/15/2023 Determine the assessment using the assessment service
-
-        var result = assessmentService.determineDiabetesRisk(patId);
-        log.info("Assessment result: {}", result);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        log.info("Assessing patient: {}", patId);
+        System.out.println(onePatient);
+        return new ResponseEntity<>(onePatient, HttpStatus.OK);
     }
 }

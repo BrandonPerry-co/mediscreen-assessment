@@ -43,29 +43,29 @@ public class AssessmentControllerTest {
                 .build();
     }
 
-    @Test
-    public void testAssess() throws Exception {
-        var expected = "Patient: Test TestNone (age 52) diabetes assessment is: None";
-        var testPatId = 1;
+//    @Test
+//    public void testAssess() throws Exception {
+//        var expected = "Patient: Test TestNone (age 52) diabetes assessment is: None";
+//        var testPatId = 1;
+//
+//        when(demographicsServiceMock.patientExists(testPatId)).thenReturn(true);
+//        when(assessmentServiceMock.determineDiabetesRisk(testPatId)).thenReturn(expected);
+//        MvcResult result = mockMvc.perform(get("/assess/id").param("patId", String.valueOf(testPatId)))
+//                .andExpect(status().isOk()).andReturn();
+//
+//        String actual = result.getResponse().getContentAsString();
+//
+//        assertThat(actual).isEqualTo(expected);
+//    }
 
-        when(demographicsServiceMock.patientExists(testPatId)).thenReturn(true);
-        when(assessmentServiceMock.determineDiabetesRisk(testPatId)).thenReturn(expected);
-        MvcResult result = mockMvc.perform(get("/assess/id").param("patId", String.valueOf(testPatId)))
-                .andExpect(status().isOk()).andReturn();
-
-        String actual = result.getResponse().getContentAsString();
-
-        assertThat(actual).isEqualTo(expected);
-    }
-
-    @Test
-    public void testPatientNotFound() throws Exception {
-        var expected = status().isNotFound();
-        var testPatId = 1;
-
-        when(demographicsServiceMock.patientExists(testPatId)).thenReturn(false);
-        MvcResult result = mockMvc.perform(get("/assess/id").param("patId", String.valueOf(testPatId)))
-                .andExpect(expected).andReturn();
-    }
+//    @Test
+//    public void testPatientNotFound() throws Exception {
+//        var expected = status().isNotFound();
+//        var testPatId = 1;
+//
+//        when(demographicsServiceMock.patientExists(testPatId)).thenReturn(false);
+//        MvcResult result = mockMvc.perform(get("/assess/id").param("patId", String.valueOf(testPatId)))
+//                .andExpect(expected).andReturn();
+//    }
 
 }

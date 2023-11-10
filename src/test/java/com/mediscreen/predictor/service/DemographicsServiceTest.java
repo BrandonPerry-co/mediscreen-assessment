@@ -7,6 +7,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -26,14 +27,6 @@ public class DemographicsServiceTest {
         String result = demographicsServiceMock.getAllPatients().toString();
         assertThat(result).isEqualTo(expected);
     }
-
-//    @Test
-//    void testPatientExists() {
-//        int id = 1;
-//        when(demographicsServiceMock.patientExists(id)).thenReturn(true);
-//        boolean result = demographicsServiceMock.patientExists(id);
-//        assertThat(result).isTrue();
-//    }
 
     @Test
     void testPatientGetAge() {
