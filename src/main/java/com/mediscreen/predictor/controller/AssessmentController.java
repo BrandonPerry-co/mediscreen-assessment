@@ -5,6 +5,7 @@ import com.mediscreen.predictor.model.Patient;
 import com.mediscreen.predictor.service.AssessmentService;
 import com.mediscreen.predictor.service.DemographicsService;
 import com.mediscreen.predictor.service.KeywordSearchService;
+import com.mediscreen.predictor.service.NotesService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,28 +31,40 @@ public class AssessmentController {
     @Autowired
     private KeywordSearchService keywordSearchService;
 
-//    @GetMapping("/id")
-//    public ResponseEntity<String> assessPatient(@RequestParam Integer patId) {
-//
-//        log.info("Assessing patient: {}", patId);
-//        if (!demographicsService.patientExists(patId)) {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
-//        // TODO: 10/15/2023 Determine the assessment using the assessment service
-//
-//        var result = assessmentService.determineDiabetesRisk(patId);
-//        log.info("Assessment result: {}", result);
-//        return new ResponseEntity<>(result, HttpStatus.OK);
-//    }
+    @Autowired
+    private NotesService notesService;
 
     @GetMapping("/id")
-    public ResponseEntity<Patient> assessPatient(@RequestParam Integer patId) throws Exception {
-        Patient onePatient = demographicsService.getPatientDemo(patId);
+    public ResponseEntity<String> assessPatient(@RequestParam Integer patId) {
+        try {
+            // Fetching the diabetes risk assessment for the patient
+            String assessmentResult = assessmentService.determineDiabetesRisk(patId);
+            log.info("Diabetes risk assessment for patient {}: {}", patId, assessmentResult);
+
+            return new ResponseEntity<>(assessmentResult, HttpStatus.OK);
+        } catch (Exception e) {
+            log.error("Error assessing patient: {}", e.getMessage());
+            // You can customize the error response based on the exception type and message
+            return new ResponseEntity<>("Error in assessing patient please verify the patient's information is correct!.", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/family")
+    public ResponseEntity<Patient> assessPatients(@RequestParam String family) throws Exception {
+        // TODO: 11/10/2023 Get the patient Demographics by ID DONE
+        Optional<Patient> onePatient = demographicsService.getPatientByFamilyName(family);
         if (onePatient == null) {
             throw new Exception("Patient not found!");
         }
-        log.info("Assessing patient: {}", patId);
+        log.info("Assessing all patients: {}", family);
         System.out.println(onePatient);
-        return new ResponseEntity<>(onePatient, HttpStatus.OK);
+
+
+        String patientId = demographicsService.getPatientIdByFamilyName(family);
+        log.info("Assessing all: {}", family);
+        System.out.println(patientId);
+
+
+        return new ResponseEntity<>(onePatient.get(), HttpStatus.OK);
     }
 }
