@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mediscreen Assessment</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.getElementById("mediscreenForm");
+            form.addEventListener("submit", function(event) {
+                event.preventDefault();
+                const patId = document.getElementById("patId").value;
+                fetch(`http://localhost:8080/assess/id?patId=${patId}`)
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById("patientsList").innerHTML = data;
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
+        });
+    </script>
+</head>
+<body>
+<h1>Welcome to Mediscreen Assessment</h1>
+
+<form id="mediscreenForm">
+    <a href="family.html">Click here to Search by Family Name</a><br><br>
+    <label for="patId">Please enter Id of patient:</label>
+    <input type="number" id="patId" name="patId" required><br><br>
+
+    <input type="submit" value="Submit" class="submit-button">
+</form>
+
+<h2>Patient Assessment</h2>
+<div id="patientsList"></div>
+</body>
+</html>
